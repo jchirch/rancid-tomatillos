@@ -6,15 +6,18 @@ import searchIcon from '../icons/search.png';
 import moviePosters from '../data/movie_posters';
 import movieDetails from '../data/movie_details';
 import MoviesContainer from '../MoviesContainer/MoviesContainer';
+import Header from '../Header/Header';
+
 
 function App() {
 
 
   return (
     <main className='App'>
-      <header>
+      {/* <header>
         <h1>rancid tomatillos</h1>
-      </header>
+      </header> */}
+      <Header/>
       <MoviesContainer movies={moviePosters}/>
     </main>
   ); 
