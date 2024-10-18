@@ -1,26 +1,36 @@
- .moviePoster, .moviePoster img {
-    position: relative;
-    background-color: #a5a8bf;
+ *{
+   /* border: 1px solid rgb(245, 246, 245); */
+ }
+ .moviePoster {
     width: 200px;
-    height: 300px;
-    border-radius: 25px;
   
     display: flex;
     justify-content: center; 
-    align-items: center;  
-    /* display: grid; 
-    grid-template-columns: 1fr 1fr 1fr; */
+    align-items: center; 
+    flex-direction: column; 
+    
+
+    img{
+      height: 300px;
+      border-radius: 10px 10px 0 0;
+    }
+ }
+
+ /* .moviePoster img{
+   height: 300px;
+
+ } */
+
+ .moviePoster:hover {
+   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  transform: scale(1.05);
  }
 
  .moviePoster p {
-   position: absolute;
-   bottom: 10px;
-   right: 10px;
-   background-color: rgba(0, 0, 0, 0.7); 
-   color: white;
-   padding: 5px 10px;
-   border-radius: 10px;
-   z-index: 1;
+   background-color: rgba(248, 244, 244, 0.973); 
+   color: rgb(0, 0, 0);
    font-weight: bold;
    font-size: 16px;
+   width: 100%;
+   border-radius: 0 0 10px 10px ;
 }
