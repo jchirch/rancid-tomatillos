@@ -1,11 +1,22 @@
 import './MoviesContainer.css';
+import MoviePoster from '../MoviePoster/MoviePoster';
 
-function Movies() {
+function MoviesContainer({movies}) {
+ 
+
   return (
       <section className='MoviesContainer'>
-        <p>We'll make some movie posters show up here!</p>
+          {movies.map((movie) => (
+      <div key={movie.id}> {/* Use a unique key prop */}
+        {/* <h1>{movie.title}</h1> */}
+        <MoviePoster movie_id={movie.id} movie_path={movie.poster_path} movie_vote={movie.vote_count} movie_title={movie.title}/>
+      </div>
+    ))}
+       
+      
+       
       </section>
   );
 }
   
-export default Movies;
+export default MoviesContainer;
