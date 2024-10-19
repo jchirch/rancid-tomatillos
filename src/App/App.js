@@ -11,6 +11,7 @@ import Header from '../Header/Header';
 
 function App() {
   const [movies, setMovies] = useState([])
+  const [selectedMovie, setSelectedMovie] = useState(null);
 
   useEffect(() => {
     setMovies(moviePosters);
@@ -44,10 +45,13 @@ function App() {
         movies={movies}
         onIncreaseVote={increaseVote}
         onDecreaseVote={decreaseVote}
+        // selectedMovie={selectedMovie}
+        setSelectedMovie={setSelectedMovie}
       />
     </main>
   );
 }
 
-
 export default App;
+
+//hook to research: useParams
