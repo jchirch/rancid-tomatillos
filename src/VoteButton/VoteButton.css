@@ -1,0 +1,17 @@
+/* .voteButton {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .voteButton button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .voteButton p {
+    font-weight: bold;
+    margin: 5px 0;
+  } */
