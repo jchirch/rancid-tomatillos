@@ -2,7 +2,7 @@ import './App.css';
 import searchIcon from '../icons/search.png';
 
 // Example imports (for later):
-// import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import moviePosters from '../data/movie_posters';
 import movieDetails from '../data/movie_details';
 import MoviesContainer from '../MoviesContainer/MoviesContainer';
@@ -10,17 +10,44 @@ import Header from '../Header/Header';
 
 
 function App() {
+  const [movies, setMovies] = useState([])
 
+  useEffect(() => {
+    setMovies(moviePosters);
+  }, []);
+
+ 
+  const increaseVote = (id) => {
+    const updatedMovies = movies.map(movie => {
+      if (movie.id !== id) {
+        return movie;
+      }
+      return { ...movie, vote_count: movie.vote_count + 1}
+    });
+    setMovies(updatedMovies);
+  };
+  
+  const decreaseVote = (id) => {
+    const updatedMovies = movies.map(movie => {
+      if (movie.id !== id) {
+        return movie;
+      }
+      return { ...movie, vote_count: movie.vote_count - 1}
+    });
+    setMovies(updatedMovies);
+  };
 
   return (
     <main className='App'>
-      {/* <header>
-        <h1>rancid tomatillos</h1>
-      </header> */}
       <Header/>
-      <MoviesContainer movies={moviePosters}/>
+      <MoviesContainer 
+        movies={movies}
+        onIncreaseVote={increaseVote}
+        onDecreaseVote={decreaseVote}
+      />
     </main>
-  ); 
+  );
 }
+
 
 export default App;
