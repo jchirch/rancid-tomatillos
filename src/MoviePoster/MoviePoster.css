@@ -13,24 +13,21 @@
     img{
       height: 300px;
       border-radius: 10px 10px 0 0;
-    }
+      }
+
+    p{
+      background-color: rgba(248, 244, 244, 0.973); 
+      color: rgb(0, 0, 0);
+      font-weight: bold;
+      font-size: 16px;
+      width: 100%;
+      border-radius: 0 0 10px 10px ;
+      }
  }
-
- /* .moviePoster img{
-   height: 300px;
-
- } */
 
  .moviePoster:hover {
    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
   transform: scale(1.05);
  }
 
- .moviePoster p {
-   background-color: rgba(248, 244, 244, 0.973); 
-   color: rgb(0, 0, 0);
-   font-weight: bold;
-   font-size: 16px;
-   width: 100%;
-   border-radius: 0 0 10px 10px ;
-}
+ /* .moviePoster  */
