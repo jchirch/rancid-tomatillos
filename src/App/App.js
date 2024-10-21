@@ -61,7 +61,7 @@ function App() {
       )}
       {selectedMovie && (
         <MovieDetails
-          movie={movieDetails}
+          movieDetails={movieDetails}
           onHomeClick={handleBackToMovies}
         />
       )}
