@@ -1,6 +1,6 @@
 .MoviesContainer {
-    border-style: solid;
-    border-color: white;
+    /* border-style: solid;
+    border-color: white; */
     margin: 10px;
     display: flex;
     flex-wrap: wrap;
