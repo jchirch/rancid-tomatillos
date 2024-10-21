@@ -23,7 +23,18 @@ function App() {
 
   useEffect(() => {
     setMovies(moviePosters);
+    // getMovies()
   }, []);
+
+  // useEffect(() => {
+  //     fetch("https://rancid-tomatillos-api-cc6f59111a05.herokuapp.com/api/v1/movies")
+  //     .then(response => response.json())
+  //     .then(data => setMovies(data))
+  //     .catch(error => console.error("Error fetching movies:", error));
+  // }, []);
+
+  // create helper function, getMovies() , within fetch then then etc
+  // within a use ffect, invoke hlper function.
 
   const increaseVote = (id) => {
     const updatedMovies = movies.map(movie => {
@@ -54,9 +65,6 @@ function App() {
           onIncreaseVote={increaseVote}
           onDecreaseVote={decreaseVote}
           onMovieClick={clickHandlerMovie}
-        // selectedMovie={selectedMovie}
-        // setSelectedMovie={setSelectedMovie}
-        // clickHandlerMovie={clickHandlerMovie}
         />
       )}
       {selectedMovie && (
@@ -65,11 +73,6 @@ function App() {
           onHomeClick={handleBackToMovies}
         />
       )}
-      {/* {selectedMovie ? (
-        <MovieDetails movie={selectedMovie} onClick={clickHandlerMovie} />
-      ) : (
-        <MoviesContainer moviePosters={moviePosters} onClick={clickHandlerMovie} />
-      )} */}
     </main>
   );
 }

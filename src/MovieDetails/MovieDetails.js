@@ -2,7 +2,7 @@
 import './MovieDetails.css';
 // import movieDetails from '../data/movie_details.js'; // will be refactored with API data
 import MoviePoster from '../MoviePoster/MoviePoster.js';
-import {useParams} from 'react';
+import { useParams } from 'react';
 import homePic from '../icons/home.png'
 
 // console.log(movieDetails)
@@ -11,15 +11,23 @@ import homePic from '../icons/home.png'
 // console.log(movieDetails.genre_ids) // array of genres
 // console.log(movieDetails.overview) // movie description
 
-function MovieDetails({movieDetails}) {
+function MovieDetails({ movieDetails, onHomeClick }) {
   return (
     <section className='MovieDetails'>
       {/* <Header/> */}
-      <img src={movieDetails.backdrop_path} alt={`Poster for ${movieDetails.title} `}/>
-      <button>Home</button>
-      <h2>{movieDetails.title}</h2>
-      <ul>{movieDetails.genre_ids}</ul>
-      <p>{movieDetails.overview}</p>
+      <div className='home_button'>
+        <button onClick={onHomeClick}>
+          <img src={homePic} alt="home button" />
+        </button>
+      </div>
+      <img src={movieDetails.backdrop_path} alt={`Poster for ${movieDetails.title} `} />
+      <div className='detail-section'>
+        <h2>{movieDetails.title}</h2>
+        <div className='genre_box'>
+          <ul>{movieDetails.genre_ids}</ul>
+        </div>
+        <p>{movieDetails.overview}</p>
+      </div>
     </section>
   );
 }
