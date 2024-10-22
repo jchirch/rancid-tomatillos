@@ -3,7 +3,7 @@ import searchIcon from '../icons/search.png';
 
 // Example imports (for later):
 import { useState, useEffect } from 'react';
-import moviePosters from '../data/movie_posters';
+// import moviePosters from '../data/movie_posters';
 import movieDetails from '../data/movie_details'; // mock
 import MovieDetails from '../MovieDetails/MovieDetails';
 import MoviesContainer from '../MoviesContainer/MoviesContainer';
@@ -21,17 +21,17 @@ function App() {
     setSelectedMovie(null); // this will navigate us back to our "home screen"
   };
 
-  useEffect(() => {
-    setMovies(moviePosters);
-    // getMovies()
-  }, []);
-
   // useEffect(() => {
-  //     fetch("https://rancid-tomatillos-api-cc6f59111a05.herokuapp.com/api/v1/movies")
-  //     .then(response => response.json())
-  //     .then(data => setMovies(data))
-  //     .catch(error => console.error("Error fetching movies:", error));
+  //   setMovies(moviePosters);
+  //   // getMovies()
   // }, []);
+
+  useEffect(() => {
+      fetch("https://rancid-tomatillos-api-cc6f59111a05.herokuapp.com/api/v1/movies")
+      .then(response => response.json())
+      .then(data => setMovies(data))
+      .catch(error => console.error("Error fetching movies:", error));
+  }, []);
 
   // create helper function, getMovies() , within fetch then then etc
   // within a use ffect, invoke hlper function.

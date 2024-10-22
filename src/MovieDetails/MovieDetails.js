@@ -8,7 +8,7 @@ import homePic from '../icons/home.png'
 // console.log(movieDetails)
 // console.log(movieDetails.backdrop_path) // img source
 // console.log(movieDetails.title) // title
-console.log(movieDetails.genre_ids) // array of genres
+// console.log(movieDetails.genre_ids) // array of genres
 // console.log(movieDetails.overview) // movie description
 
 function MovieDetails({ movieDetails, onHomeClick }) {
