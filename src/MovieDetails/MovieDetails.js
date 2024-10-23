@@ -6,9 +6,6 @@ import './MovieDetails.css';
 import homePic from '../icons/green_home.png'
 import { useState, useEffect } from 'react';
 
-
-
-
 function MovieDetails({ selectedMovie, onHomeClick }) {
   console.log("id", selectedMovie)
   const [movieDetails, setMovieDetails] = useState({});

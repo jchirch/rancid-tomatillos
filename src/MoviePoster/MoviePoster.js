@@ -5,12 +5,12 @@ function MoviePoster({ movie_id, movie_poster, movie_vote, movie_title, onIncrea
   // console.log("from poster movie detail", movieDetail)
 
   return (
-    <section className='moviePoster'>
+    <section className='moviePoster' data-cy="movie-poster">
       <img src={movie_poster} alt={`${movie_title} poster`} onClick={() => onMovieClick(movie_id)} />
-      <p className="voteCount">
-        <button onClick={() => onIncreaseVote(movie_id)} style={{ fontSize: '20px' }}>🍅</button>
+      <p className="voteCount" data-cy="vote-container">
+        <button data-cy="upvote-button" onClick={() => onIncreaseVote(movie_id)} style={{ fontSize: '20px' }}>🍅</button>
         {movie_vote}
-        <button onClick={() => onDecreaseVote(movie_id)} style={{ fontSize: '20px' }}>🦠</button>
+        <button data-cy="downvote-button" onClick={() => onDecreaseVote(movie_id)} style={{ fontSize: '20px' }}>🦠</button>
       </p>
     </section>
   );
