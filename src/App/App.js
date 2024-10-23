@@ -1,10 +1,6 @@
 import './App.css';
-import searchIcon from '../icons/search.png';
-
-// Example imports (for later):
+// import searchIcon from '../icons/search.png';
 import { useState, useEffect } from 'react';
-// import moviePosters from '../data/movie_posters';
-import movieDetails from '../data/movie_details'; // mock
 import MovieDetails from '../MovieDetails/MovieDetails';
 import MoviesContainer from '../MoviesContainer/MoviesContainer';
 import Header from '../Header/Header';
@@ -21,27 +17,46 @@ function App() {
     setSelectedMovie(null); // this will navigate us back to our "home screen"
   };
 
-  // useEffect(() => {
-  //   setMovies(moviePosters);
-  //   // getMovies()
-  // }, []);
-
-  useEffect(() => {
-      fetch("https://rancid-tomatillos-api-cc6f59111a05.herokuapp.com/api/v1/movies")
+  function getMovies() {
+     fetch("https://rancid-tomatillos-api-cc6f59111a05.herokuapp.com/api/v1/movies")
       .then(response => response.json())
-      .then(data => setMovies(data))
+      .then(data => setMovies([...data]))
       .catch(error => console.error("Error fetching movies:", error));
-  }, []);
+  }
 
-  // create helper function, getMovies() , within fetch then then etc
-  // within a use ffect, invoke hlper function.
+ 
+  useEffect(() => { 
+    getMovies()
+   
+    }, []);
 
+    function updateVote(id, direction) {
+      console.log("update vote", direction)
+      fetch(`https://rancid-tomatillos-api-cc6f59111a05.herokuapp.com/api/v1/movies/${id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          vote_direction: direction
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log("Vote count update", data);
+        return data;
+      } )
+      .catch(error => console.error("Error updating vote:", error))
+    }
+  
   const increaseVote = (id) => {
     const updatedMovies = movies.map(movie => {
       if (movie.id !== id) {
         return movie;
       }
-      return { ...movie, vote_count: movie.vote_count + 1 }
+     
+      updateVote(movie.id, 'up');
+      return { ...movie, vote_count: movie.vote_count + 1  }
     });
     setMovies(updatedMovies);
   };
@@ -51,7 +66,10 @@ function App() {
       if (movie.id !== id) {
         return movie;
       }
-      return { ...movie, vote_count: movie.vote_count - 1 }
+    
+      updateVote(movie.id, 'down')
+      return { ...movie, vote_count: movie.vote_count - 1  }
+    
     });
     setMovies(updatedMovies);
   };
@@ -69,7 +87,7 @@ function App() {
       )}
       {selectedMovie && (
         <MovieDetails
-          movieDetails={movieDetails}
+          selectedMovie={selectedMovie}
           onHomeClick={handleBackToMovies}
         />
       )}
@@ -78,5 +96,3 @@ function App() {
 }
 
 export default App;
-
-//hook to research: useParams
