@@ -19,7 +19,8 @@
     justify-content: space-between;
     background: transparent;
     color: #3e49b1;
-    border-color: rgb(41, 236, 15);
+    /* border-color: rgb(41, 236, 15); */
+    border: none;
     height: auto;
     width: 40%;
     margin-top: -75%;
