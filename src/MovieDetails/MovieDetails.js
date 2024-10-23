@@ -1,17 +1,34 @@
 // import Header from '../Header/Header';
 import './MovieDetails.css';
-import movieDetails from '../data/movie_details.js'; // will be refactored with API data
-import MoviePoster from '../MoviePoster/MoviePoster.js';
-import { useParams } from 'react';
-import homePic from '../icons/home.png'
+// import movieDetails from '../data/movie_details.js'; // will be refactored with API data
+// import MoviePoster from '../MoviePoster/MoviePoster.js';
+// import { useParams } from 'react';
+import homePic from '../icons/green_home.png'
+import { useState, useEffect } from 'react';
 
-// console.log(movieDetails)
-// console.log(movieDetails.backdrop_path) // img source
-// console.log(movieDetails.title) // title
-// console.log(movieDetails.genre_ids) // array of genres
-// console.log(movieDetails.overview) // movie description
 
-function MovieDetails({ movieDetails, onHomeClick }) {
+
+
+function MovieDetails({ selectedMovie, onHomeClick }) {
+  console.log("id", selectedMovie)
+  const [movieDetails, setMovieDetails] = useState({});
+
+  function getMovieDetails() {
+    console.log("tacos")
+    fetch(`https://rancid-tomatillos-api-cc6f59111a05.herokuapp.com/api/v1/movies/${selectedMovie}`)
+     .then(response => response.json())
+     .then(data => {
+      console.log("data", data)
+      setMovieDetails(data)
+     } )
+     .catch(error => console.error("Error fetching movies:", error));
+  }
+  
+  useEffect(() => {
+    getMovieDetails()
+    }, []);
+
+    console.log("Movie Details:", movieDetails);
   return (
     <section className='MovieDetails'>
       {/* <Header/> */}
@@ -24,10 +41,11 @@ function MovieDetails({ movieDetails, onHomeClick }) {
       <div className='detail-section'>
         <h2>{movieDetails.title}</h2>
         <div className='genre-box'>
-          {movieDetails.genre_ids.map(genre => (
+        
+          {movieDetails.genre_ids && movieDetails.genre_ids.map(genre => (
             <ul key={genre}>{genre}</ul>
-          ))}
-          {/* <ul>{movieDetails.genre_ids}</ul> */}
+          ))} 
+          
         </div>
         <p>{movieDetails.overview}</p>
       </div>
