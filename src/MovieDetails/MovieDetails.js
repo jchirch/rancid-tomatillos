@@ -28,7 +28,8 @@ function MovieDetails({ selectedMovie, onHomeClick }) {
     getMovieDetails()
     }, []);
 
-    console.log("Movie Details:", movieDetails);
+    console.log("Movie Details LOOK:", movieDetails);
+    console.log("Movie Details LOOK HERE:", movieDetails.title);
   return (
     <section className='MovieDetails'>
       {/* <Header/> */}
@@ -38,6 +39,9 @@ function MovieDetails({ selectedMovie, onHomeClick }) {
         </button>
       </div>
       <img src={movieDetails.backdrop_path} alt={`Poster for ${movieDetails.title} `} />
+      {/* <img src={movieDetails.backdrop_path} alt={movieDetails.title} /> */}
+{/* line 41 works, but says poster for undefined. line 42 doesnt throw any text or errors */}
+      
       <div className='detail-section'>
         <h2>{movieDetails.title}</h2>
         <div className='genre-box'>
