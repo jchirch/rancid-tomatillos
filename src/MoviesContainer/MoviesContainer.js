@@ -1,7 +1,8 @@
 import './MoviesContainer.css';
 import MoviePoster from '../MoviePoster/MoviePoster';
+// import { useNavigate } from 'react-router-dom';
 
-function MoviesContainer({ movies, onIncreaseVote, onDecreaseVote, onMovieClick, onHomeClick }) {
+function MoviesContainer({ movies, onIncreaseVote, onDecreaseVote, onMovieClick }) {
   const moviePosters = movies.map((movie) => {
     return (
       <MoviePoster
@@ -14,8 +15,10 @@ function MoviesContainer({ movies, onIncreaseVote, onDecreaseVote, onMovieClick,
         onIncreaseVote={onIncreaseVote}
         onDecreaseVote={onDecreaseVote}
         onMovieClick={onMovieClick}
-        onHomeClick={onHomeClick}
+        // onHomeClick={onHomeClick}
       />
+
+
     );
   });
 

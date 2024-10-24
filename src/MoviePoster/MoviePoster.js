@@ -1,7 +1,7 @@
 import './MoviePoster.css';
 // import VoteButton from '../VoteButton/VoteButton';
 
-function MoviePoster({ movie_id, movie_poster, movie_vote, movie_title, onIncreaseVote, onDecreaseVote, setSelectedMovie, onHomeClick, onMovieClick }) {
+function MoviePoster({ movie_id, movie_poster, movie_vote, movie_title, onIncreaseVote, onDecreaseVote, setSelectedMovie, onMovieClick }) {
   // console.log("from poster movie detail", movieDetail)
 
   return (
