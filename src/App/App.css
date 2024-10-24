@@ -3,6 +3,13 @@
   padding: 0;
   }
 
+  .App {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
 body {
   background-color: #3e49b1;
 }
