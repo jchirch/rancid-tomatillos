@@ -11,17 +11,16 @@ function App() {
   const [selectedMovie, setSelectedMovie] = useState(null);
   const navigate = useNavigate()
 
-  const clickHandlerMovie = (movie) => {
+  const navMovieDetails = (movie) => {
     console.log("movie=>", movie)
-    // movie id undefined, console log
     navigate(`/${movie}`)
 
     setSelectedMovie(movie);
   };
 
-  const handleBackToMovies = () => {
-    setSelectedMovie(null); // this will navigate us back to our "home screen"
-  };
+  // const handleBackToMovies = () => {
+  //   setSelectedMovie(null); // this will navigate us back to our "home screen"
+  // };
 
   function getMovies() {
     fetch("https://rancid-tomatillos-api-cc6f59111a05.herokuapp.com/api/v1/movies")
@@ -88,7 +87,7 @@ function App() {
           movies={movies}
           onIncreaseVote={increaseVote}
           onDecreaseVote={decreaseVote}
-          onMovieClick={clickHandlerMovie}
+          navMovieDetails={navMovieDetails}
         />
       )}
       {selectedMovie && (
@@ -103,7 +102,7 @@ function App() {
           movies={movies}
           onIncreaseVote={increaseVote}
           onDecreaseVote={decreaseVote}
-          onMovieClick={clickHandlerMovie}
+          navMovieDetails={navMovieDetails}
         />} />
 
         <Route
