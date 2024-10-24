@@ -10,17 +10,26 @@ import { useNavigate, Route, Routes } from 'react-router-dom';
 function MovieDetails({ selectedMovie }) {
   console.log("id", selectedMovie)
   const [movieDetails, setMovieDetails] = useState({});
+  const [error, setError] = useState(null);
 
   function getMovieDetails() {
     console.log("tacos")
     fetch(`https://rancid-tomatillos-api-cc6f59111a05.herokuapp.com/api/v1/movies/${selectedMovie}`)
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+          throw new Error("Failed to fetch movies.");
+        }
+        return response.json();
+      })
       .then(data => {
         console.log("data", data)
         setMovieDetails(data)
       })
-      .catch(error => console.error("Error fetching movies:", error));
-  }
+      .catch(error => {
+        console.error("Error fetching movies:", error);
+        setError('Movie details not available.');
+      });
+    }
 
   useEffect(() => {
     getMovieDetails()
