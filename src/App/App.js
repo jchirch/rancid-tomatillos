@@ -1,117 +1,114 @@
-import './App.css';
-// import searchIcon from '../icons/search.png';
-import { useState, useEffect } from 'react';
-import MovieDetails from '../MovieDetails/MovieDetails';
-import MoviesContainer from '../MoviesContainer/MoviesContainer';
-import Header from '../Header/Header';
-import { useNavigate, Routes, Route } from 'react-router-dom';
+import "./App.css";
+
+import { useState, useEffect } from "react";
+import MovieDetails from "../MovieDetails/MovieDetails";
+import MoviesContainer from "../MoviesContainer/MoviesContainer";
+import Header from "../Header/Header";
+import { useNavigate, Routes, Route } from "react-router-dom";
 
 function App() {
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
-  const navigate = useNavigate()
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const navMovieDetails = (movie) => {
-    console.log("movie=>", movie)
-    navigate(`/${movie}`)
+    console.log("movie=>", movie);
+    navigate(`/${movie}`);
 
     setSelectedMovie(movie);
   };
 
-  // const handleBackToMovies = () => {
-  //   setSelectedMovie(null); // this will navigate us back to our "home screen"
-  // };
-
   function getMovies() {
-    fetch("https://rancid-tomatillos-api-cc6f59111a05.herokuapp.com/api/v1/movies")
-      .then(response => response.json())
-      .then(data => setMovies([...data]))
-      .catch(error => console.error("Error fetching movies:", error));
+    fetch(
+      "https://rancid-tomatillos-api-cc6f59111a05.herokuapp.com/api/v1/movies"
+    )
+      .then((response) => response.json())
+      .then((data) => setMovies([...data]))
+      .catch((error) => {
+        console.error("Error fetching movies:", error);
+        setError("Oops, no movies found.");
+      });
   }
 
-
   useEffect(() => {
-    getMovies()
-
+    getMovies();
   }, []);
 
   function updateVote(id, direction) {
-    console.log("update vote", direction)
-    fetch(`https://rancid-tomatillos-api-cc6f59111a05.herokuapp.com/api/v1/movies/${id}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        vote_direction: direction
+    console.log("update vote", direction);
+    fetch(
+      `https://rancid-tomatillos-api-cc6f59111a05.herokuapp.com/api/v1/movies/${id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          vote_direction: direction,
+        }),
+      }
+    )
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to update vote");
+        }
+        return response.json();
       })
-    })
-      .then(response => response.json())
-      .then(data => {
+      .then((data) => {
         console.log("Vote count update", data);
         return data;
       })
-      .catch(error => console.error("Error updating vote:", error))
+      .catch((error) => {
+        console.error("Error updating vote:", error);
+        setError("Failed to update vote. Please try again later.");
+      });
   }
 
   const increaseVote = (id) => {
-    const updatedMovies = movies.map(movie => {
+    const updatedMovies = movies.map((movie) => {
       if (movie.id !== id) {
         return movie;
       }
 
-      updateVote(movie.id, 'up');
-      return { ...movie, vote_count: movie.vote_count + 1 }
+      updateVote(movie.id, "up");
+      return { ...movie, vote_count: movie.vote_count + 1 };
     });
     setMovies(updatedMovies);
   };
 
   const decreaseVote = (id) => {
-    const updatedMovies = movies.map(movie => {
+    const updatedMovies = movies.map((movie) => {
       if (movie.id !== id) {
         return movie;
       }
 
-      updateVote(movie.id, 'down')
-      return { ...movie, vote_count: movie.vote_count - 1 }
-
+      updateVote(movie.id, "down");
+      return { ...movie, vote_count: movie.vote_count - 1 };
     });
     setMovies(updatedMovies);
   };
 
   return (
-    <main className='App'>
-      {/* <Header />
-      {!selectedMovie && (
-        <MoviesContainer
-          movies={movies}
-          onIncreaseVote={increaseVote}
-          onDecreaseVote={decreaseVote}
-          navMovieDetails={navMovieDetails}
-        />
-      )}
-      {selectedMovie && (
-        <MovieDetails
-          selectedMovie={selectedMovie}
-          onHomeClick={handleBackToMovies}
-        />
-      )} */}
+    <main className="App">
       <Header />
+      {error && <p className="error-message">{error}</p>}
       <Routes>
-        <Route path="/" element={<MoviesContainer
-          movies={movies}
-          onIncreaseVote={increaseVote}
-          onDecreaseVote={decreaseVote}
-          navMovieDetails={navMovieDetails}
-        />} />
+        <Route
+          path="/"
+          element={
+            <MoviesContainer
+              movies={movies}
+              onIncreaseVote={increaseVote}
+              onDecreaseVote={decreaseVote}
+              navMovieDetails={navMovieDetails}
+            />
+          }
+        />
 
         <Route
-        path="/:id" element={<MovieDetails
-          selectedMovie={selectedMovie}
-          // onHomeClick={handleBackToMovies}
-        />}
-        //use navigate on home button, make path /
-        // pull mvie info like id from use params
+          path="/:id"
+          element={<MovieDetails selectedMovie={selectedMovie} />}
         />
       </Routes>
     </main>
