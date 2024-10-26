@@ -21,6 +21,9 @@ This project was designed and implemented over a 10 day sprint by a team of two 
 
 ## App
 
+**Wireframe**
+![wireframe](screenshots/rancid_wireframe.png)
+
 **HomeScreen**
 ![home_screenshot](screenshots/rancid_home.png)
 
