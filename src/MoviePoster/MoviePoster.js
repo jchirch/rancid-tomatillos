@@ -8,15 +8,23 @@ function MoviePoster({
   movie_title,
   navMovieDetails,
 }) {
-
   return (
-    <section className="moviePoster" data-cy="movie-poster">
+    <section className="movie-poster" data-cy="movie-poster">
       <img
         src={movie_poster}
         alt={`${movie_title} poster`}
+        tabindex="0"
         onClick={() => navMovieDetails(movie_id)}
+        onKeyDown={(e) => {
+          if (
+            (e.key === "Enter" || e.key === " ") &&
+            e.target === e.currentTarget
+          ) {
+            navMovieDetails(movie_id);
+          }
+        }}
       />
-      <p className="voteCount" data-cy="vote-container">
+      <p className="vote-count" data-cy="vote-container">
         <button
           data-cy="upvote-button"
           onClick={() => handleVote(movie_id, "up")}

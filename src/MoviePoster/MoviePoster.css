@@ -1,63 +1,39 @@
- *{
-   /* border: 1px solid rgb(244, 245, 244); */
- }
- .moviePoster {
-    width: 200px;
-    
-    display: flex;
-    justify-content: center; 
-    align-items: center; 
-    flex-direction: column; 
-    
+.movie-poster {
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 
-    img{
-      height: 300px;
-      border-radius: 10px 10px 0 0;
-      cursor: pointer;
-    }
- }
-
- /* .moviePoster img{
-   height: 300px;
-
- } */
-
- .moviePoster:hover {
-   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-  transform: scale(1.05);
- }
-
- .moviePoster p {
-   background-color: rgba(248, 244, 244, 0.973); 
-   color: rgb(0, 0, 0);
-   font-weight: bold;
-   font-size: 16px;
-   width: 100%;
-   height: 100%;
-   border-radius: 0 0 10px 10px ;
-   align-items: center;
-  
+  img {
+    height: 300px;
+    border-radius: 10px 10px 0 0;
+    cursor: pointer;
   }
-  .voteCount {
-    /* background-color: transparent; */
-    display: flex;
-    justify-content: space-around;
-    
-    /* flex-direction: row;
-    align-items: stretch;
-    width: 100%;
-   
-    
-  /* gap: 10px; */
 }
 
-.voteCount button {
+.movie-poster:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  transform: scale(1.05);
+}
+
+.movie-poster p {
+  background-color: rgba(248, 244, 244, 0.973);
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  font-size: 16px;
+  width: 100%;
+  height: 100%;
+  border-radius: 0 0 10px 10px;
+  align-items: center;
+}
+.vote-count {
+  display: flex;
+  justify-content: space-around;
+}
+
+.vote-count button {
   background-color: transparent;
   border: none;
   cursor: pointer;
 }
-
-/* .voteButton p {
-  font-weight: bold;
-  margin: 5px 0;
-} */

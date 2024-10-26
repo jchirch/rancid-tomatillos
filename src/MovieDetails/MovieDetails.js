@@ -37,7 +37,7 @@ function MovieDetails() {
   };
 
   return (
-    <section className="MovieDetails">
+    <section className="movie-details">
       {error && <p className="error-message">{error}</p>}
       {!error && (
         <>

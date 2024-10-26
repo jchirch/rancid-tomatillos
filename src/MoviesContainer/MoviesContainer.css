@@ -1,6 +1,4 @@
-.MoviesContainer {
-    /* border-style: solid;
-    border-color: white; */
+.movies-container {
     margin: 10px;
     display: flex;
     flex-wrap: wrap;

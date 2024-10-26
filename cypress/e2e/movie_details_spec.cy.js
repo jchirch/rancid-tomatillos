@@ -8,6 +8,14 @@ describe("Main Page", () => {
         fixture: "dark_knight_details",
       }
     ).as("darkKnightDetails");
+    cy.intercept(
+      "GET",
+      "https://rancid-tomatillos-api-cc6f59111a05.herokuapp.com/api/v1/movies",
+      { 
+        statusCode: 200, 
+        body: [] 
+      }
+    ).as("moviesList");
     cy.visit("http://localhost:3000/155");
   });
 
@@ -32,13 +40,13 @@ describe("Main Page", () => {
         statusCode: 200,
         fixture: "movie_posters",
       }
-    ).as("darkKnightDetails");
+    ).as("movieMainPage");
     cy.visit("http://localhost:3000/155");
     cy.get("button > img").click();
-    cy.get(".MoviesContainer").children().should("have.length", 4);
+    cy.get(".movies-container").children().should("have.length", 4);
   });
 
-  it("displays an error message when movie details fail to load", () => {
+  it("Displays an error message when movie details fail to load", () => {
     cy.intercept(
       "GET",
       "https://rancid-tomatillos-api-cc6f59111a05.herokuapp.com/api/v1/movies/155",

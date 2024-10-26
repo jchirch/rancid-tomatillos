@@ -23,3 +23,15 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('checkVoteUpdate', (voteSelector, upvote = true, expectedCount) => {
+    cy.get(voteSelector).should('contain', expectedCount);
+  
+    if (upvote) {
+      cy.get('[data-cy="upvote-button"]').first().click();
+    } else {
+      cy.get('[data-cy="downvote-button"]').first().click();
+    }
+  
+    cy.get(voteSelector).should('contain', upvote ? expectedCount + 1 : expectedCount - 1);
+  });
