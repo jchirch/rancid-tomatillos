@@ -1,32 +1,26 @@
-import './MoviesContainer.css';
-import MoviePoster from '../MoviePoster/MoviePoster';
-// import { useNavigate } from 'react-router-dom';
+import "./MoviesContainer.css";
+import MoviePoster from "../MoviePoster/MoviePoster";
 
-function MoviesContainer({ movies, onIncreaseVote, onDecreaseVote, navMovieDetails }) {
+function MoviesContainer({
+  movies,
+  handleVote,
+  navMovieDetails,
+}) {
   const moviePosters = movies.map((movie) => {
     return (
       <MoviePoster
         key={movie.id}
         movie_id={movie.id}
         movie_poster={movie.poster_path}
-        onClick={() => navMovieDetails(movie)} // Pass the whole movie object into the click handler we wrote in - Robert
+        onClick={() => navMovieDetails(movie)} 
         movie_vote={movie.vote_count}
         movie_title={movie.title}
-        onIncreaseVote={onIncreaseVote}
-        onDecreaseVote={onDecreaseVote}
+        handleVote={handleVote}
         navMovieDetails={navMovieDetails}
-        // onHomeClick={onHomeClick}
       />
-
-
     );
   });
-
-  return (
-    <section className='MoviesContainer'>
-      {moviePosters}
-    </section>
-  );
+  return <section className="MoviesContainer">{moviePosters}</section>;
 }
 
 export default MoviesContainer;
