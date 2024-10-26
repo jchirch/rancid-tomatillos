@@ -1,9 +1,8 @@
 import "./App.css";
-
-import { useState, useEffect } from "react";
 import MovieDetails from "../MovieDetails/MovieDetails";
 import MoviesContainer from "../MoviesContainer/MoviesContainer";
 import Header from "../Header/Header";
+import { useState, useEffect } from "react";
 import { useNavigate, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -13,7 +12,7 @@ function App() {
   const navigate = useNavigate();
 
   const navMovieDetails = (movie) => {
-    console.log("movie=>", movie);
+    // console.log("movie=>", movie);
     navigate(`/${movie}`);
 
     setSelectedMovie(movie);
@@ -36,7 +35,7 @@ function App() {
   }, []);
 
   function updateVote(id, direction) {
-    console.log("update vote", direction);
+    // console.log("update vote", direction);
     fetch(
       `https://rancid-tomatillos-api-cc6f59111a05.herokuapp.com/api/v1/movies/${id}`,
       {
@@ -65,26 +64,22 @@ function App() {
       });
   }
 
-  const increaseVote = (id) => {
+  const handleVote = (id, direction) => {
     const updatedMovies = movies.map((movie) => {
       if (movie.id !== id) {
         return movie;
       }
-
-      updateVote(movie.id, "up");
-      return { ...movie, vote_count: movie.vote_count + 1 };
-    });
-    setMovies(updatedMovies);
-  };
-
-  const decreaseVote = (id) => {
-    const updatedMovies = movies.map((movie) => {
-      if (movie.id !== id) {
-        return movie;
+      updateVote(movie.id, direction);
+      let updatedVoteCount = movie.vote_count;
+      if (direction === "up") {
+        updatedVoteCount += 1;
+      } else {
+        updatedVoteCount -= 1;
       }
-
-      updateVote(movie.id, "down");
-      return { ...movie, vote_count: movie.vote_count - 1 };
+      return {
+        ...movie,
+        vote_count: updatedVoteCount,
+      };
     });
     setMovies(updatedMovies);
   };
@@ -99,13 +94,11 @@ function App() {
           element={
             <MoviesContainer
               movies={movies}
-              onIncreaseVote={increaseVote}
-              onDecreaseVote={decreaseVote}
+              handleVote={handleVote}
               navMovieDetails={navMovieDetails}
             />
           }
         />
-
         <Route
           path="/:id"
           element={<MovieDetails selectedMovie={selectedMovie} />}
