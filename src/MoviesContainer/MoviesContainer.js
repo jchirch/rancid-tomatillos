@@ -20,7 +20,7 @@ function MoviesContainer({
       />
     );
   });
-  return <section className="MoviesContainer">{moviePosters}</section>;
+  return <section className="movies-container">{moviePosters}</section>;
 }
 
 export default MoviesContainer;

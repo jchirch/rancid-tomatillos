@@ -12,9 +12,7 @@ function App() {
   const navigate = useNavigate();
 
   const navMovieDetails = (movie) => {
-    // console.log("movie=>", movie);
     navigate(`/${movie}`);
-
     setSelectedMovie(movie);
   };
 
@@ -35,7 +33,6 @@ function App() {
   }, []);
 
   function updateVote(id, direction) {
-    // console.log("update vote", direction);
     fetch(
       `https://rancid-tomatillos-api-cc6f59111a05.herokuapp.com/api/v1/movies/${id}`,
       {
@@ -55,7 +52,6 @@ function App() {
         return response.json();
       })
       .then((data) => {
-        console.log("Vote count update", data);
         return data;
       })
       .catch((error) => {
@@ -85,7 +81,7 @@ function App() {
   };
 
   return (
-    <main className="App">
+    <main className="app">
       <Header />
       {error && <p className="error-message">{error}</p>}
       <Routes>
